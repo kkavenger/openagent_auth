@@ -47,7 +47,7 @@ const RightSidebar = ({ className, visible }: RightSidebarProps) => {
                     </button>
                 </div>
                 <div className="absolute top-24 left-0 right-0 flex items-center px-9 md:px-6">
-                    <div className="base2 text-n-4/75">Chat history</div>
+                    <div className="base2 text-n-4/75">Tasks</div>
                     <div className="ml-3 px-2 bg-n-3 rounded-lg caption1 text-n-4 dark:bg-n-5/50">
                         {clean ? "0" : "26/100"}
                     </div>

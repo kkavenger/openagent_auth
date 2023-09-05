@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { Menu, Transition } from "@headlessui/react";
 import Image from "@/components/Image";
 import Icon from "@/components/Icon";
@@ -11,6 +12,7 @@ type ProfileProps = {};
 
 const Profile = ({}: ProfileProps) => {
     const [visibleSettings, setVisibleSettings] = useState<boolean>(false);
+    const { data : session} = useSession();
 
     const menu = [
         {
@@ -26,7 +28,7 @@ const Profile = ({}: ProfileProps) => {
         {
             title: "Log out",
             icon: "logout",
-            onClick: () => console.log("Log out"),
+            onClick: () => signOut(),
         },
     ];
 
@@ -35,9 +37,9 @@ const Profile = ({}: ProfileProps) => {
             <div className="relative z-10 mr-8 lg:mr-6 md:static">
                 <Menu>
                     <Menu.Button className="group relative w-10 h-10 rounded-full transition-shadow ui-open:shadow-[0_0_0_0.25rem_#0084FF]">
-                        <Image
+                        <img
                             className="rounded-full object-cover"
-                            src="/images/avatar.jpg"
+                            src={session?.user?.image}
                             fill
                             alt="Avatar"
                         />
@@ -54,16 +56,16 @@ const Profile = ({}: ProfileProps) => {
                         <Menu.Items className="absolute top-full -right-5 w-[19.88rem] mt-[0.9375rem] p-4 bg-n-1 border border-n-2 rounded-2xl shadow-[0px_48px_64px_-16px_rgba(0,0,0,0.25)] md:-right-38 md:w-[calc(100vw-4rem)] dark:bg-n-7 dark:border-n-5">
                             <div className="flex items-center mb-3">
                                 <div className="relative w-15 h-15">
-                                    <Image
+                                    <img
                                         className="rounded-full object-cover"
-                                        src="/images/avatar.jpg"
+                                        src={session.user?.image}
                                         fill
                                         alt="Avatar"
                                     />
                                     <div className="absolute right-0 bottom-0 w-4.5 h-4.5 bg-primary-2 rounded-full border-4 border-n-1 dark:border-n-7"></div>
                                 </div>
                                 <div className="pl-4">
-                                    <div className="h6">Tran Mau Tri Tam</div>
+                                    <div className="h6">{session?.user?.name}</div>
                                     <div className="caption1 text-n-4">
                                         Lead visual designer at UI8
                                     </div>

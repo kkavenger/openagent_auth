@@ -1,11 +1,13 @@
 import Link from "next/link";
 import Image from "@/components/Image";
+import { useSession, signIn, signOut} from "next-auth/react";
 
 type ProfileProps = {
     visible?: boolean;
 };
 
 const Profile = ({ visible }: ProfileProps) => (
+
     <div
         className={`${
             visible
